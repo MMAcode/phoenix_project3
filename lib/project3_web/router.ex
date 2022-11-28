@@ -16,9 +16,9 @@ defmodule Project3Web.Router do
 
   scope "/", Project3Web do
     pipe_through :browser
-
+    live "/", LivePageTwoPeriodicalUpdates
+    live "/one", LivePageOne_ButtonsStylesForms
     get "/archive", PageController, :home
-    live "/", LivePageOne
   end
 
   # Other scopes may use custom stacks.

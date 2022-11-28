@@ -2,17 +2,17 @@ defmodule Project3Web.LiveFormsMiro do
   import Project3Web.CoreComponents
   use Project3Web, :live_view
 
-  def render(assigns) do
-    ~H"""
-    <div>
-      <h3>Form (miro)</h3>
-      <form phx-submit="submit">
-        <input type="text" phx-value="name" />
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
-    """
-  end
+  # def render(assigns) do
+  #   ~H"""
+  #   <%!-- <div>
+  #     <h3>Form (miro)</h3>
+  #     <form phx-submit="submit">
+  #       <input type="text" phx-value="name" />
+  #       <input type="submit" value="Submit" />
+  #     </form>
+  #   </div> --%>
+  #   """
+  # end
 
   def tailwind_form(assigns) do
     ~H"""
@@ -24,8 +24,8 @@ defmodule Project3Web.LiveFormsMiro do
         <input name="nameInput" value={@name} type="text" placeholder="Your name please..." />
         <span>received name: <%= @name %></span>
 
-        <h3>light slider:</h3>
-        <input phx-change="sliderUpdated" name="light_slider" value={@light_intensity} type="range" />
+        <h4>light slider:</h4>
+        <input phx-change="updateMe" name="light_slider" value={@light_intensity} type="range" />
         <%!-- <.button type="submit">Submit</.button> --%>
 
         <div style={"background-color:yellow; transition:1s; width: #{@light_intensity}%"}>
@@ -35,4 +35,6 @@ defmodule Project3Web.LiveFormsMiro do
     </div>
     """
   end
+
+
 end

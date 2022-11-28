@@ -1,20 +1,24 @@
-defmodule Project3Web.LivePageOne do
+defmodule Project3Web.LivePageOne_ButtonsStylesForms do
   # alias Project3Web.CoreComponents, as: TCC
   # alias Project3Web.CoreComponents
   alias Project3Web.LiveFunctionalComponentsMiro
   alias Project3Web.LiveFormsMiro
   use Project3Web, :live_view
 
+  defp assignProps(socket) do
+    assign(socket, light: false, light_intensity: Enum.random(1..100), name: "Miro")
+  end
+
   def mount(_params, _session, socket) do
-    socket = assign(socket, light: false, light_intensity: Enum.random(1..100), name: "Miro")
-    {:ok, socket}
+    socket = assignProps(socket)
     {:ok, socket}
   end
 
   def render(assigns) do
     ~H"""
+    <h1>Page 1</h1>
     <%= LiveFunctionalComponentsMiro.render(assigns) %>
-    <%= LiveFormsMiro.render(assigns) %>
+    <%!-- <%= LiveFormsMiro.render(assigns) %> --%>
     <%= LiveFormsMiro.tailwind_form(assigns) %>
     """
   end
@@ -42,13 +46,6 @@ defmodule Project3Web.LivePageOne do
     # BUTTONS:
   def handle_event("click", params, socket), do: LiveFunctionalComponentsMiro.handle_event("click", params, socket)
   def handle_event("switch", params, socket), do: LiveFunctionalComponentsMiro.handle_event("switch", params, socket)
-
-
-
-
-
-
-
 
 
 
