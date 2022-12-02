@@ -12,6 +12,7 @@ defmodule Project3Web.PubSubPage.PubSub_AllIn2 do
     {:noreply, assign(socket, :counter, action.(socket.assigns.counter))}
   end
 
+
   @impl true
   def render(assigns) do
     ~H"""
