@@ -19,12 +19,17 @@ defmodule Project3Web.PubSubPage.PubSub_AllIn1 do
     <h2>PubSubs</h2>
     <h3>PubSub_Send</h3>
     <p>Counter: <%= @counter %></p>
-    <button phx-click="inc">Increment</button>
-    <button phx-click="dec">Decrement</button>
+    <.button  phx-click="inc">Increment</.button>
+    <.button class="bg-red-500" phx-click="dec">Decrement</.button>
     """
   end
 
-  @impl true
+  # @impl true
+  # def handle_event(any, _params, socket) do
+  #   dbg(["miro - handle_ANY_event: ", any])
+  #   {:noreply, socket}
+  # end
+
   def handle_event("inc", _params, socket) do
     Phoenix.PubSub.broadcast(Project3.PubSub, Constants.pubsubTopic.counterAll, {:PS1, &(&1 + 1)})
     {:noreply, socket}
