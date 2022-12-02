@@ -2,7 +2,7 @@ defmodule Project3Web.PubSubPage.PubSub_AllIn2 do
   use Project3Web, :live_view
   @impl true
   def mount(_params, _session, socket) do
-    Phoenix.PubSub.subscribe(Project3.PubSub, "counterAll")
+    Phoenix.PubSub.subscribe(Project3.PubSub, Constants.pubsubTopic.counterAll)
     {:ok, assign(socket, :counter, 0)}
   end
 
@@ -27,12 +27,12 @@ defmodule Project3Web.PubSubPage.PubSub_AllIn2 do
 
   @impl true
   def handle_event("inc", _params, socket) do
-    dbg(Phoenix.PubSub.broadcast(Project3.PubSub, "counterAll", {:PS2, &(&1 + 1)}))
+    dbg(Phoenix.PubSub.broadcast(Project3.PubSub, Constants.pubsubTopic.counterAll, {:PS2, &(&1 + 1)}))
     {:noreply, socket}
   end
 
   def handle_event("dec", _params, socket) do
-    dbg(Phoenix.PubSub.broadcast(Project3.PubSub, "counterAll", {:PS2, &(&1 - 1)}))
+    dbg(Phoenix.PubSub.broadcast(Project3.PubSub, Constants.pubsubTopic.counterAll, {:PS2, &(&1 - 1)}))
     {:noreply, socket}
   end
 end
