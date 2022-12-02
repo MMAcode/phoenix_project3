@@ -1,4 +1,4 @@
-defmodule Project3Web.PubSubPage.PubSubPlay do
+defmodule Project3Web.PubSubPage.PubSub_Send do
   use Project3Web, :live_view
   @impl true
   def mount(_params, _session, socket) do
@@ -17,7 +17,7 @@ defmodule Project3Web.PubSubPage.PubSubPlay do
     ~H"""
     <h1>Page 3</h1>
     <h2>PubSubs</h2>
-    <h3>PubSubPlay</h3>
+    <h3>PubSub_Send</h3>
     <p>Counter: <%= @counter %></p>
     <button phx-click="inc">Increment</button>
     <button phx-click="dec">Decrement</button>

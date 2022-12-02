@@ -1,4 +1,4 @@
-defmodule Project3Web.PubSubPage.PubSubPlay2 do
+defmodule Project3Web.PubSubPage.PubSub_Receive do
   use Project3Web, :live_view
   @impl true
   def mount(_params, _session, socket) do
@@ -8,7 +8,7 @@ defmodule Project3Web.PubSubPage.PubSubPlay2 do
 
   @impl true
   def handle_info({:PS1, act} = message, socket) do
-    dbg(["miro - follwoing message received in PubSubPlay2: ", message])
+    dbg(["miro - follwoing message received in PubSub_Receive: ", message])
     {:noreply, assign(socket, :counter, socket.assigns.counter + (if act == :inc, do: 1, else: -1))}
   end
 
@@ -17,7 +17,7 @@ defmodule Project3Web.PubSubPage.PubSubPlay2 do
     ~H"""
     <h1>Page 3</h1>
     <h2>PubSubs</h2>
-    <h3>PubSubPlay</h3>
+    <h3>PubSub_Send</h3>
     <p>Counter: <%= @counter %></p>
     <button phx-click="inc">Increment</button>
     <button phx-click="dec">Decrement</button>
