@@ -1,0 +1,40 @@
+<.header>
+  Listing Books of users
+  <:actions>
+    <.link patch={~p"/books_of_users/new"}>
+      <.button>New Book of user</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="books_of_users" rows={@books_of_users} row_click={&JS.navigate(~p"/books_of_users/#{&1}")}>
+  <:col :let={book_of_user} label="Title"><%= book_of_user.title %></:col>
+  <:col :let={book_of_user} label="Author"><%= book_of_user.author %></:col>
+  <:action :let={book_of_user}>
+    <div class="sr-only">
+      <.link navigate={~p"/books_of_users/#{book_of_user}"}>Show</.link>
+    </div>
+    <.link patch={~p"/books_of_users/#{book_of_user}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={book_of_user}>
+    <.link phx-click={JS.push("delete", value: %{id: book_of_user.id})} data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="book_of_user-modal"
+  show
+  on_cancel={JS.navigate(~p"/books_of_users")}
+>
+  <.live_component
+    module={Project3Web.BookOfUserLive.FormComponent}
+    id={@book_of_user.id || :new}
+    title={@page_title}
+    action={@live_action}
+    book_of_user={@book_of_user}
+    navigate={~p"/books_of_users"}
+  />
+</.modal>

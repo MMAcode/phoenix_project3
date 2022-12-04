@@ -30,12 +30,19 @@ defmodule Project3Web.Router do
       live "all2", PubSub_AllIn2
     end
 
-    # scope "3", PubSubPage do
-    #   live "/3a", PubSubPage.PubSub_Send
-    #   live "/3b", PubSubPage.PubSub_Receive
-    #   live "/3all1", PubSubPage.PubSub_AllIn1
-    #   live "/3all2", PubSubPage.PubSub_AllIn2
-    # end
+    scope "/books", BookLive do
+      live "/", Index, :index
+      live "/new", Index, :new
+      live "/:id/edit", Index, :edit
+      live "/:id", Show, :show
+      live "/:id/show/edit", Show, :edit
+    end
+
+    live "/blog_posts", PostLive.Index, :index
+    live "/blog_posts/new", PostLive.Index, :new
+    live "/blog_posts/:id/edit", PostLive.Index, :edit
+    live "/blog_posts/:id", PostLive.Show, :show
+    live "/blog_posts/:id/show/edit", PostLive.Show, :edit
 
     get "/archive", PageController, :home
 
@@ -46,6 +53,19 @@ defmodule Project3Web.Router do
 
     live "/users/:id", UserLive.Show, :show
     live "/users/:id/show/edit", UserLive.Show, :edit
+
+    # LINKS:
+    live "/book_users", BookUserLive.Index, :index
+    live "/book_users/new", BookUserLive.Index, :new
+    live "/book_users/:id/edit", BookUserLive.Index, :edit
+    live "/book_users/:id", BookUserLive.Show, :show
+    live "/book_users/:id/show/edit", BookUserLive.Show, :edit
+
+    live "/books_of_users", BookOfUserLive.Index, :index
+    live "/books_of_users/new", BookOfUserLive.Index, :new
+    live "/books_of_users/:id/edit", BookOfUserLive.Index, :edit
+    live "/books_of_users/:id", BookOfUserLive.Show, :show
+    live "/books_of_users/:id/show/edit", BookOfUserLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,26 @@
+<.header>
+  Post <%= @post.id %>
+  <:subtitle>This is a post record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/blog_posts/#{@post}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit post</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Title"><%= @post.title %></:item>
+</.list>
+
+<.back navigate={~p"/blog_posts"}>Back to blog_posts</.back>
+
+<.modal :if={@live_action == :edit} id="post-modal" show on_cancel={JS.patch(~p"/blog_posts/#{@post}")}>
+  <.live_component
+    module={Project3Web.PostLive.FormComponent}
+    id={@post.id}
+    title={@page_title}
+    action={@live_action}
+    post={@post}
+    navigate={~p"/blog_posts/#{@post}"}
+  />
+</.modal>

@@ -1,0 +1,39 @@
+<.header>
+  Listing Book users
+  <:actions>
+    <.link patch={~p"/book_users/new"}>
+      <.button>New Book user</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="book_users" rows={@book_users} row_click={&JS.navigate(~p"/book_users/#{&1}")}>
+  <:col :let={book_user} label="Name"><%= book_user.name %></:col>
+  <:action :let={book_user}>
+    <div class="sr-only">
+      <.link navigate={~p"/book_users/#{book_user}"}>Show</.link>
+    </div>
+    <.link patch={~p"/book_users/#{book_user}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={book_user}>
+    <.link phx-click={JS.push("delete", value: %{id: book_user.id})} data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="book_user-modal"
+  show
+  on_cancel={JS.navigate(~p"/book_users")}
+>
+  <.live_component
+    module={Project3Web.BookUserLive.FormComponent}
+    id={@book_user.id || :new}
+    title={@page_title}
+    action={@live_action}
+    book_user={@book_user}
+    navigate={~p"/book_users"}
+  />
+</.modal>
