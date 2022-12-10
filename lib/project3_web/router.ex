@@ -30,6 +30,11 @@ defmodule Project3Web.Router do
       live "all2", PubSub_AllIn2
     end
 
+    scope "/4", Page4 do
+      live "/", Quill
+      live "/quill", Quill
+    end
+
     scope "/books", BookLive do
       live "/", Index, :index
       live "/new", Index, :new
