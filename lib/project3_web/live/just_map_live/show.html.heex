@@ -1,0 +1,26 @@
+<.header>
+  Just map <%= @just_map.id %>
+  <:subtitle>This is a just_map record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/just_maps/#{@just_map}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit just_map</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Data"><%= @just_map.data %></:item>
+</.list>
+
+<.back navigate={~p"/just_maps"}>Back to just_maps</.back>
+
+<.modal :if={@live_action == :edit} id="just_map-modal" show on_cancel={JS.patch(~p"/just_maps/#{@just_map}")}>
+  <.live_component
+    module={Project3Web.JustMapLive.FormComponent}
+    id={@just_map.id}
+    title={@page_title}
+    action={@live_action}
+    just_map={@just_map}
+    navigate={~p"/just_maps/#{@just_map}"}
+  />
+</.modal>

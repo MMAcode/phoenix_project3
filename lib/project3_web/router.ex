@@ -71,6 +71,15 @@ defmodule Project3Web.Router do
     live "/books_of_users/:id/edit", BookOfUserLive.Index, :edit
     live "/books_of_users/:id", BookOfUserLive.Show, :show
     live "/books_of_users/:id/show/edit", BookOfUserLive.Show, :edit
+
+    # JSON
+    # :map only
+    live "/just_maps", JustMapLive.Index, :index
+    live "/just_maps/new", JustMapLive.Index, :new
+    live "/just_maps/:id/edit", JustMapLive.Index, :edit
+
+    live "/just_maps/:id", JustMapLive.Show, :show
+    live "/just_maps/:id/show/edit", JustMapLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

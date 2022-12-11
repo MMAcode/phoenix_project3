@@ -1,0 +1,39 @@
+<.header>
+  Listing Just maps
+  <:actions>
+    <.link patch={~p"/just_maps/new"}>
+      <.button>New Just map</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="just_maps" rows={@just_maps} row_click={&JS.navigate(~p"/just_maps/#{&1}")}>
+  <:col :let={just_map} label="Data"><%= just_map.data %></:col>
+  <:action :let={just_map}>
+    <div class="sr-only">
+      <.link navigate={~p"/just_maps/#{just_map}"}>Show</.link>
+    </div>
+    <.link patch={~p"/just_maps/#{just_map}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={just_map}>
+    <.link phx-click={JS.push("delete", value: %{id: just_map.id})} data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="just_map-modal"
+  show
+  on_cancel={JS.navigate(~p"/just_maps")}
+>
+  <.live_component
+    module={Project3Web.JustMapLive.FormComponent}
+    id={@just_map.id || :new}
+    title={@page_title}
+    action={@live_action}
+    just_map={@just_map}
+    navigate={~p"/just_maps"}
+  />
+</.modal>
