@@ -49,8 +49,10 @@ defmodule Project3Web.Page4.Quill do
           socket
           |> put_flash(:info, "Just map created successfully")
           #  |> push_navigate(to: socket.assigns.navigate)
-          |> push_event("miroFromServer", %{id: "miroId"})
-          # |> push_event("miroFromServer", %{savedQuill: just_map})
+          # |> push_event("miroFromServer", %{id: "miroId"})
+          # |> fn x -> dbg(["miro 125", x], printable_limit: :infinity, limit: :infinity); x end.()
+          |> fn x -> dbg(["miro 1256jm", just_map.data], printable_limit: :infinity, limit: :infinity); x end.()
+          |> push_event("miroFromServer", %{savedQuill: just_map.data})
         }
         # {:noreply, push_event(socket, "highlight", %{id: "item-#{item.id}"})}
 
@@ -60,15 +62,16 @@ defmodule Project3Web.Page4.Quill do
   end
 
   defp list_quills do
-    Project3.JsonQuill.list_just_maps() |> dbg
+    Project3.JsonQuill.list_just_maps()
+    # |> dbg
   end
 
   defp prep_list(list) do
     list
     |> Enum.map(fn row -> row.data end)
-    |> dbg
+    # |> dbg
     |> Enum.map(fn data -> Jason.encode!(data) end)
-    |> dbg
+    # |> dbg
     # [1,2,3]
   end
 
@@ -76,6 +79,6 @@ defmodule Project3Web.Page4.Quill do
     listX
     |> Enum.filter(&(&1.id==id))
     |> Enum.map(fn row -> row.data end)
-    |> dbg
+    # |> dbg
   end
 end

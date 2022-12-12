@@ -23,14 +23,14 @@ defmodule Project3.JsonQuill.JustMap do
     # dbg stringAsJson
     # dbg(is_map(stringAsJson))
 
-    dbg ["miro attrs:", attrs]
+    # dbg ["miro attrs:", attrs]
     data = Map.get(attrs,"data")
-    dbg ["miro attrs.data is_map: ", is_map(data), "string.binary:", is_binary(data), "is nil:", is_nil(data)]
+    # dbg ["miro attrs.data is_map: ", is_map(data), "string.binary:", is_binary(data), "is nil:", is_nil(data)]
     if is_binary(data) do
-      dbg "data is string, converting to dataJ"
+      # dbg "data is string, converting to dataJ"
       {_, dataJ } = result = Jason.decode(data) |> dbg
-      dbg ["miro attr.data result after json decode: ", result]
-      dbg(["is result's dajaJ map?:", is_map(dataJ)])
+      # dbg ["miro attr.data result after json decode: ", result]
+      # dbg(["is result's dajaJ map?:", is_map(dataJ)])
     end
 
 

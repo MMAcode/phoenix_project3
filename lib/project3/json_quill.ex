@@ -18,7 +18,8 @@ defmodule Project3.JsonQuill do
 
   """
   def list_just_maps do
-    Repo.all(JustMap)|> fn x -> dbg(["miro25", x]); x end.()
+    Repo.all(JustMap)
+    # |> fn x -> dbg(["miro25", x]); x end.()
   end
 
   @doc """
