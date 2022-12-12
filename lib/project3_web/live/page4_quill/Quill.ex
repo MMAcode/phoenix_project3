@@ -3,7 +3,7 @@ defmodule Project3Web.Page4.Quill do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, :just_maps, list_quills())}
+    {:ok, assign(socket, just_maps: list_quills(), quill: nil)}
   end
 
   @impl true
@@ -16,9 +16,12 @@ defmodule Project3Web.Page4.Quill do
     <h3>Existing:</h3>
     <%= for row <- prep_list(@just_maps) do %>
       <div><%= row %></div>
-      <div>hi</div>
     <% end %>
 
+
+    <%!-- <script> --%>
+      <%!-- miroPost = <%= Jason.encode!(getQuill(@just_maps, 2)) %>; --%>
+    <%!-- </script> --%>
     <h3>Add new:</h3>
     <div id="editor" phx-hook="TextEditor" />
     <.button phx-click="save" phx-disable-with="Saving...">Save</.button>
@@ -37,14 +40,19 @@ defmodule Project3Web.Page4.Quill do
   end
 
   defp save_quill(socket) do
+    dbg "saving quill"
     case Project3.JsonQuill.create_just_map(%{data: socket.assigns.quill}) do
-      {:ok, _just_map} ->
+      {:ok, just_map} ->
+        dbg "seems like saved"
         {
           :noreply,
           socket
           |> put_flash(:info, "Just map created successfully")
           #  |> push_navigate(to: socket.assigns.navigate)
+          |> push_event("miroFromServer", %{id: "miroId"})
+          # |> push_event("miroFromServer", %{savedQuill: just_map})
         }
+        # {:noreply, push_event(socket, "highlight", %{id: "item-#{item.id}"})}
 
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply, assign(socket, :changeset, changeset)}
@@ -55,12 +63,19 @@ defmodule Project3Web.Page4.Quill do
     Project3.JsonQuill.list_just_maps() |> dbg
   end
 
-  defp prep_list (list) do
+  defp prep_list(list) do
     list
     |> Enum.map(fn row -> row.data end)
     |> dbg
     |> Enum.map(fn data -> Jason.encode!(data) end)
     |> dbg
     # [1,2,3]
+  end
+
+  defp getQuill(listX, id) do
+    listX
+    |> Enum.filter(&(&1.id==id))
+    |> Enum.map(fn row -> row.data end)
+    |> dbg
   end
 end

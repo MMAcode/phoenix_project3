@@ -5,7 +5,7 @@ defmodule Project3.JsonQuill.JustMap do
   schema "just_maps" do
     field :data, :map
 
-    # timestamps()
+    timestamps()
   end
 
   @doc false

@@ -34,6 +34,13 @@ let liveSocket = new LiveSocket("/live", Socket, {hooks: Hooks, params: {_csrf_t
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
 window.addEventListener("phx:page-loading-start", info => topbar.delayedShow(200))
 window.addEventListener("phx:page-loading-stop", info => topbar.hide())
+window.addEventListener("phx:miroFromServer", (e) => {
+    // let el = document.getElementById(e.detail.id)
+    // if (el) {
+    // logic for highlighting
+    // }
+    console.log("miro: e from server received:", e)
+})
 
 // connect if there are any LiveViews on the page
 liveSocket.connect()

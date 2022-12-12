@@ -2,6 +2,9 @@ import Quill from 'quill';
 export let TextEditor = {
     mounted() {
         console.log('Mounting');
+
+        // console.log('miroPost:', miroPost);
+
         let quill = new Quill(this.el, {
             modules: {
                 toolbar: [
