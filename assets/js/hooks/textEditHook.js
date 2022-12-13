@@ -40,13 +40,10 @@ export let TextEditor = {
         });
 
         window.addEventListener("phx:miroFromServer", (e) => {
-            // let el = document.getElementById(e.detail.id)
-            // if (el) {
-            // logic for highlighting
-            // }
             console.log("miro: e from server received:", e)
-            console.log("miro: quill data:", e.detail.savedQuill)
-            quill.setContents({ "ops": [{ "insert": "xox2\n" }] })
+            let quill0 = JSON.parse(e.detail.savedQuills[1])
+            console.log("miro: quill0 :", quill0)
+            quill.setContents(quill0)
         })
 
 
