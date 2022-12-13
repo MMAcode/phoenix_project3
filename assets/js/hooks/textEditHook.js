@@ -18,6 +18,12 @@ export let TextEditor = {
             theme: 'snow'
         });
 
+        // https://quilljs.com/docs/api/#setcontents
+        // quill.setContents(delta: Delta, source: String = 'api'): Delta
+        // dbData = { "ops": [{ "insert": "xx\n" }] }
+        // quill.setContents(dbData)
+        // quill.setContents({ "ops": [{ "insert": "xox\n" }] })
+
         quill.on('text-change', (delta, oldDelta, source) => {
             if (source == 'api') {
                 console.log("An API call triggered this change.");
@@ -29,8 +35,19 @@ export let TextEditor = {
                 // def handle_event("text-editor", %{"text_content" => content}, socket) do
                 // this.pushEventTo(this.el.phxHookId, "text-editor", {"text_content": quill.getContents()})
                 this.pushEvent("text-editor", { "text_content": quill.getContents() })
+
             }
         });
+
+        window.addEventListener("phx:miroFromServer", (e) => {
+            // let el = document.getElementById(e.detail.id)
+            // if (el) {
+            // logic for highlighting
+            // }
+            console.log("miro: e from server received:", e)
+            console.log("miro: quill data:", e.detail.savedQuill)
+            quill.setContents({ "ops": [{ "insert": "xox2\n" }] })
+        })
 
 
     },

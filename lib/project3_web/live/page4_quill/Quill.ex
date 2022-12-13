@@ -3,7 +3,7 @@ defmodule Project3Web.Page4.Quill do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, just_maps: list_quills(), quill: nil)}
+    {:ok, assign(socket, just_maps: list_quills(), quill: nil, count: 0)}
   end
 
   @impl true
@@ -23,9 +23,21 @@ defmodule Project3Web.Page4.Quill do
       <%!-- miroPost = <%= Jason.encode!(getQuill(@just_maps, 2)) %>; --%>
     <%!-- </script> --%>
     <h3>Add new:</h3>
-    <div id="editor" phx-hook="TextEditor" />
+    <div id="editorWrapper" phx-update="ignore">
+    <div
+      id="editor"
+      phx-hook="TextEditor"
+       />
+    </div>
     <.button phx-click="save" phx-disable-with="Saving...">Save</.button>
+    <.button phx-click="inc">inc <%=@count%></.button>
+
     """
+  end
+
+    @impl true
+  def handle_event("inc", _, socket) do
+    {:noreply, assign(socket, count: socket.assigns.count+1)}
   end
 
   @impl true

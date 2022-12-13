@@ -41,7 +41,6 @@ window.addEventListener("phx:miroFromServer", (e) => {
     // }
     console.log("miro: e from server received:", e)
     console.log("miro: quill data:", e.detail.savedQuill)
-
 })
 
 // connect if there are any LiveViews on the page
